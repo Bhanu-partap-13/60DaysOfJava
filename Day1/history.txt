@@ -1,0 +1,6 @@
+Java was Developed by  - James Gosling
+- Firstly it was called "Greentalk" by James Gosling and File Extension was '.gt' .
+- After that it was called Oak.
+- In 1995, Oak was renamed as "Java"
+
+Features of Java - 1. Object Oriented, 2. Simple, 3. Secured, 4. Independent and Robust , 5. Dynamic, 6. Multithreaded, 7. High Performance
