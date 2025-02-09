@@ -25,3 +25,5 @@ public class hello {
 //Java is case - sensitive language.
 //The file name must match the class name. If the file name is hello.java, the class name must be hello.
 //Invalid class name - 1hello, helloworld, hello world
+
+//If you want to run the code - 'java -cp . Day2.datatype' (Run the commmand on Terminal)
