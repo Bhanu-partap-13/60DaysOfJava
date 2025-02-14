@@ -36,3 +36,5 @@ System.out.println("Static Variable: " + variable.staticVar);
 obj.localVariableExample();
     }
 }
+
+//If you want to run the code - 'java -cp . Day2.datatype' (Run the commmand on Terminal)
