@@ -16,4 +16,4 @@ public class commandline {
 // JDK - Java Developement Kit is a software developement kit required to develop Java Applications.
 // JDK ---> JRE ---> JVM + Class Libraries 
 
-//If you want to run the code - 'java -cp . Day2.datatype' (Run the commmand on Terminal)
+//If you want to run the code - 'java -cp . Day2.commandline' (Run the commmand on Terminal)

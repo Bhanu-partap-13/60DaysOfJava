@@ -76,4 +76,4 @@ public class accessmodifier{
 }
 
 
-//If you want to run the code - 'java -cp . Day2.datatype' (Run the commmand on Terminal)
+//If you want to run the code - 'java -cp . Day4.accessmodifier' (Run the commmand on Terminal)

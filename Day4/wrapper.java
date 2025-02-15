@@ -77,4 +77,4 @@ public class wrapper {
 }
 
 
-//If you want to run the code - 'java -cp . Day2.datatype' (Run the commmand on Terminal)
+//If you want to run the code - 'java -cp . Day4.wrapper' (Run the commmand on Terminal)

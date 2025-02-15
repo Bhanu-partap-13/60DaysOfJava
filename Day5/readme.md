@@ -1,6 +1,7 @@
 # Day 5: Operators in Java
 
-Today we covered the topic of operators, types of operators, and operator precedence in Java. Below are some multiple-choice questions (MCQs) for beginners to master this topic.
+Today we covered the topic of operators, types of operators, and operator precedence in Java.
+ Below are some multiple-choice questions (MCQs) for beginners to master this topic.
 
 ## Beginner-Friendly Questions
 

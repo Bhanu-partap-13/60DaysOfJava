@@ -1,4 +1,4 @@
-// package Day1; - this is the package name use to organize the classes in a logical manner
+//package Day1; - this is the package name use to organize the classes in a logical manner
 // import java.util.Scanner; //Import the Scanner class (We will Discuss in input.java)
 
 public class hello {
@@ -26,4 +26,4 @@ public class hello {
 //The file name must match the class name. If the file name is hello.java, the class name must be hello.
 //Invalid class name - 1hello, helloworld, hello world
 
-//If you want to run the code - 'java -cp . Day2.datatype' (Run the commmand on Terminal)
+//If you want to run the code - 'java -cp . Day1.hello' (Run the commmand on Terminal)
