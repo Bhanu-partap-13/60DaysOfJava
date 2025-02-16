@@ -107,4 +107,4 @@ public class ConditionDemo {
 }
 
 
-
+//If you want to run the code - 'java -cp . Day6.ConditionDemo' (Run the commmand on Terminal)
