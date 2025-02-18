@@ -38,3 +38,6 @@ while(j<=10){
         }while(k<=10);
     }
 }
+
+
+//If you want to run the code - 'java -cp . Day7.practice' (Run the commmand on Terminal)
