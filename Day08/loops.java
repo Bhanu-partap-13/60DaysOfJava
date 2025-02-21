@@ -1,4 +1,4 @@
-package Day8;
+package Day08;
 //Loops in java facilitates the execution of a set of instuctions
 //Java provides three looping statements - while, do while and for loop
 

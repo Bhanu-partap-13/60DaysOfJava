@@ -1,4 +1,4 @@
-package Day2;
+package Day02;
 public class datatype {
     public static void main(String[] args){
 // It specifies  different sizes and values  that can be stored in a variable.

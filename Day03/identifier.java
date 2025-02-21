@@ -1,4 +1,4 @@
-package Day3;
+package Day03;
 //Identifier can be a class name,  variable name, method name, package name, constant name.
 
 public class identifier { // class name

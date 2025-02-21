@@ -1,4 +1,4 @@
-package Day6;
+package Day06;
 
 // - Use if to specify a block of code to be executed, if a specified condition is True.
 // - Use else to specify a block of code to be executed, if a same condition is False.

@@ -1,4 +1,4 @@
-package Day7;
+package Day07;
 
 // ---------------------------------------------------
 // Understanding Java Basics

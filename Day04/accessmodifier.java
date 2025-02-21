@@ -8,7 +8,7 @@
 // 4. default   → Accessible within the same package (if no modifier is specified).
 // ---------------------------------------------------
 
-package Day4;
+package Day04;
 
 public class accessmodifier{
     

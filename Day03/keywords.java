@@ -1,5 +1,5 @@
 
-package Day3;
+package Day03;
 public class keywords {
     //Java Keywords are also known as Reserved Words.
     //                                --------------

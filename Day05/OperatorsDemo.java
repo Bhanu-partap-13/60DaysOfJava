@@ -13,7 +13,7 @@
 // 6️⃣ Increment & Decrement Operators (++ and --)
 // 7️⃣ Conditional (Ternary) Operator (? :)
 // ---------------------------------------------------
-package Day5;
+package Day05;
 
 public class OperatorsDemo {
     public static void main(String[] args) {
