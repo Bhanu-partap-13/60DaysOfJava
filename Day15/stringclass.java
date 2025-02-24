@@ -30,7 +30,7 @@ public class stringclass {
         System.out.println("Comparison between string created using string literal and new keyword: (Literal) "+strLiteral1.equals(strNew));
         System.out.println("Comparison between string created using new keyword: "+strLiteral1.equals(strLiteral2));
         System.out.println("Comparison between string created using string literal and new keyword:(Implicit) "+strNew.equals(strNew2));
-        System.out.println("Comparison between string literal and string literal (Implicit): ")
+        System.out.println("Comparison between string literal and string literal (Implicit): ");
 }
 }
 
