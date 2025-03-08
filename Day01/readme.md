@@ -259,3 +259,67 @@
         }
     }
     ```
+
+    # Galactic Adventures Episode Information
+
+## Problem Statement
+
+Saran and Dinesh are preparing the release details for their new show 'Galactic Adventures' on their streaming service. To ensure the episode information is accurate, Saran asks Dinesh to create a program to input the episode number and its duration, and then display this information.
+
+Your task as a programmer is to assist them in this program.
+
+### Input Format
+The input consists of:
+- An integer `N`, representing the episode number.
+- A double value `X`, representing its duration.
+
+### Output Format
+The output prints:
+```
+Episode [N] is [X] hours long!
+```
+
+Refer to the sample output for the exact text and format.
+
+### Code Constraints
+- `1 ≤ N ≤ 10`
+- `0.1 ≤ X ≤ 12.0`
+
+### Sample Test Cases
+
+#### Input 1:
+```
+1 2.75
+```
+#### Output 1:
+```
+Episode 1 is 2.75 hours long!
+```
+
+#### Input 2:
+```
+2 3.75
+```
+#### Output 2:
+```
+Episode 2 is 3.75 hours long!
+```
+
+## Solution
+
+```java
+import java.util.Scanner;
+
+public class GalacticAdventures {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int episodeNumber = scanner.nextInt();
+        double duration = scanner.nextDouble();
+        
+        System.out.printf("Episode %d is %.2f hours long!%n", episodeNumber, duration);
+        
+        scanner.close();
+    }
+}
+```
