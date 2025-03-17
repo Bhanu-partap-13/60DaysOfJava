@@ -20,7 +20,24 @@ eg: abstract class Animal{ }
 /* Abstract method
 eg: abstract void find(); 
 */
+//1. Method must be abstract as the class is abstract
+/*
+ abstract class abc{
+  abstract void test();
+}
+class check extends abc{
+    void test(){
+        System.out.println("Test is called");
+    }
+}
 
+class Main{
+    public static void main(String[] args){
+        check c = new check();
+        c.test();
+    }
+}
+*/
 abstract class Animal{
     String name;
     public Animal(String name){

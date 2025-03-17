@@ -38,6 +38,68 @@ package Day25;
 //
 // ---------------------------------------------------  
 
+// ->
+//Here is the simple code of static nested class.
+// class outer{
+//     static class inner{
+//         void run1() {
+//             System.out.println("I am in the inner class");
+//         }
+//     }
+// }
+
+// class Main{ 
+//     public static void main(String[] args){
+//     outer.inner obj = new outer.inner();
+//     obj.run1();
+//     }
+// }
+
+/*
+-> here is the simple code of non static class      
+class outer{
+    class inner{
+        void run1(){
+            System.out.println("I am in the inner class");
+        }
+    }
+}
+
+class nonstaticmain{
+    public static void main(String[] args){
+        outer obj1 = new outer();
+        outer.inner obj = obj1.new inner();
+        obj.run1();
+    }
+}
+*/
+/*
+ -> here is the code of non static using the two nested classes 
+class outer{
+    class inner{
+        void run1(){
+            System.out.println("I am in the inner class");
+        }
+        class test{
+            void check(){
+                System.out.println("I am in the test class");
+        }
+    }
+    }
+}
+
+class nonstaticmain{
+    public static void main(String[] args){
+        outer obj1 = new outer();
+        outer.inner obj = obj1.new inner();
+        outer.inner.test obj2 = obj.new test();
+        obj.run1();
+        obj2.check();
+    }
+}
+ */
+
+
 class Outer {
     // Instance and static members of the outer class
     int instanceValue = 10;
