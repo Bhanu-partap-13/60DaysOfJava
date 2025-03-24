@@ -101,6 +101,7 @@ Today, I covered the topic of exceptions, exception class hierarchy, types of ex
 
 4. **Which of the following code snippets demonstrates the correct use of `finally`?**  
     - [x] 
+
       ```java
       try {
             int result = 10 / 2;
@@ -109,6 +110,7 @@ Today, I covered the topic of exceptions, exception class hierarchy, types of ex
       }
       ```  
     - [ ] 
+
       ```java
       try {
             int result = 10 / 2;
@@ -117,6 +119,7 @@ Today, I covered the topic of exceptions, exception class hierarchy, types of ex
       }
       ```  
     - [ ] 
+
       ```java
       try {
             int result = 10 / 2;
@@ -127,6 +130,7 @@ Today, I covered the topic of exceptions, exception class hierarchy, types of ex
       }
       ```  
     - [ ] 
+
       ```java
       finally {
             System.out.println("Finally block executed");
@@ -150,18 +154,22 @@ Today, I covered the topic of exceptions, exception class hierarchy, types of ex
 
 6. **Which of the following code snippets demonstrates throwing an exception?**  
     - [ ] 
+    
       ```java
       throw new Exception();
       ```  
     - [x] 
+    
       ```java
       throw new IOException();
       ```  
     - [ ] 
+    
       ```java
       throw Exception();
       ```  
     - [ ] 
+    
       ```java
       throw IOException();
       ```  
@@ -175,6 +183,7 @@ Today, I covered the topic of exceptions, exception class hierarchy, types of ex
          System.out.println(e.getMessage());
     }
     ```
+
     - [ ] Compilation error  
     - [x] Custom Exception  
     - [ ] Program terminates abnormally  
