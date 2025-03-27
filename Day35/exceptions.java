@@ -11,6 +11,9 @@
 //Checked: Compile time exceptions
 //Unchecked: Runtime exceptions
 
+
+
+
 // 🌟 Java Exception Handling Guide 🌟
 // ---------------------------------------------
 // 1️.Exception Class Hierarchy
