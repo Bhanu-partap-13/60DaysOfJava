@@ -11,11 +11,11 @@
 //       FileWriter - for writing to a file.
 //       FileReader - for reading from a file.
 // ---------------------------------------------------  
-
+package Day42;  // Package declaration
 import java.io.*;  // Importing required classes
 import java.util.Scanner;
 
-public class IOFundamentals {
+public class input {
     public static void main(String[] args) {
         // ---------------------------------
         // 1️. Using Scanner to Read User Input
@@ -35,33 +35,6 @@ public class IOFundamentals {
             System.out.println("Your age is: " + age);
         } catch (IOException e) {
             System.out.println("Error reading input: " + e.getMessage());
-        }
-
-        // ---------------------------------
-        // 3️. Writing Data to a File using FileWriter
-        // ---------------------------------
-        try {
-            FileWriter writer = new FileWriter("output.txt");
-            writer.write("Hello, " + name + "! Your age is " + age + ".\n");
-            writer.close();
-            System.out.println("Data written to output.txt successfully.");
-        } catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
-        }
-
-        // ---------------------------------
-        // 4️. Reading Data from a File using FileReader
-        // ---------------------------------
-        try {
-            FileReader reader = new FileReader("output.txt");
-            int character;
-            System.out.println("Reading from file: ");
-            while ((character = reader.read()) != -1) {
-                System.out.print((char) character);
-            }
-            reader.close();
-        } catch (IOException e) {
-            System.out.println("Error reading from file: " + e.getMessage());
         }
 
         scanner.close(); // Closing the scanner
