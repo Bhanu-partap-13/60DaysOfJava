@@ -33,7 +33,7 @@ public class intArr{
 
        //   String arr[] = new arr[10];
        //           OR
-       String arr[] = {"ram","sham","ganesh"};
+       String arr[] = {"ram","sham","ganesh"}; 
        
        for(int i=0; i<arr.length;i++){
         System.out.println("Name at "+i+" is: "+arr[i]);

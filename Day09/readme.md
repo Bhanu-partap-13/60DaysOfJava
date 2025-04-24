@@ -10,13 +10,13 @@
 
 2. How do you initialize a 1D array with values 1, 2, 3, 4, 5?
     - [ ] `int[] array = {1, 2, 3, 4, 5};`
-    - [x] `int[] array = new int[]{1, 2, 3, 4, 5};`
+    - [ ] `int[] array = new int[]{1, 2, 3, 4, 5};`
     - [ ] `int array = new int[]{1, 2, 3, 4, 5};`
-    - [ ] `int array[] = {1, 2, 3, 4, 5};`
+    - [x] `int array[] = {1, 2, 3, 4, 5};`
 
 3. How do you access the first element of an array named `arr`?
-    - [ ] `arr[0]`
-    - [x] `arr[1]`
+    - [x] `arr[0]`
+    - [ ] `arr[1]`
     - [ ] `arr.first()`
     - [ ] `arr.get(0)`
 
@@ -167,6 +167,7 @@
             System.out.println(sum);
         }
     }
+
     ```
     ***
     **Problem 2: Maximum Element in Array**

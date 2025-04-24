@@ -10,7 +10,7 @@
 
 2. What is the size of a `char` in Java?
     - [ ] 1 byte
-    - [ ] 2 bytes
+    - [ ] 3 bytes
     - [x] 2 bytes
     - [ ] 4 bytes
 

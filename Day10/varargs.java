@@ -88,10 +88,10 @@ public class varargs {
         System.out.println("Sum: " + sum(10, 20, 30, 40)); // Output: 100
 
         // Testing concatenate()
-        System.out.println("Concatenation: " + concatenate("Hello", "Java", "World!")); // Output: Hello Java World!
+        System.out.println("Concatenation: " + concatenate("Hello", "Java", "World!")); // Output: Concatenation: Hello Java World!
 
         // Testing findMax()
-        System.out.println("Maximum: " + findMax(3, 8, 2, 10, 5)); // Output: 10
+        System.out.println("Maximum: " + findMax(3, 8, 2, 10, 5)); // Output: Maximum: 10
 
         // Testing displayNumbers()
         displayNumbers(5, 10, 15, 20); // Output: Numbers: 5 10 15 20
