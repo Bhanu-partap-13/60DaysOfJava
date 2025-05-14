@@ -1,4 +1,4 @@
-# Day 52: Collections and Generics in Java
+# Day 52: ArrayLists in Java
 
 Today, I explored the topic of **Collections by Generics** and implemented **ArrayLists** in Java. Below are some beginner-friendly multiple-choice questions (MCQs) and a few code-based questions to help master this topic.
 

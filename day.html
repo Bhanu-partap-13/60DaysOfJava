@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day Detail - 60 Days of Java</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/markdown.min.js"></script>
+    <!-- Showdown.js for Markdown conversion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(79, 70, 229, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .code-font, pre, code {
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+        
+        .markdown-content {
+            overflow-x: auto;
+        }
+        
+        .markdown-content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .markdown-content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+        
+        .markdown-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .markdown-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .markdown-content ul, .markdown-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .markdown-content ul {
+            list-style-type: disc;
+        }
+        
+        .markdown-content ol {
+            list-style-type: decimal;
+        }
+        
+        .markdown-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .markdown-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .markdown-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .markdown-content th, .markdown-content td {
+            border: 1px solid #334155;
+            padding: 0.5rem;
+        }
+        
+        .markdown-content th {
+            background-color: #1e293b;
+        }
+        
+        .markdown-content tr:nth-child(even) {
+            background-color: #1e293b;
+        }
+        
+        .markdown-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            margin-left: 0;
+            margin-right: 0;
+            font-style: italic;
+        }
+        
+        .markdown-content pre {
+            background-color: #1e1e1e !important;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .markdown-content code {
+            font-size: 0.9rem;
+            border-radius: 0.25rem;
+        }
+        
+        .markdown-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        
+        /* Task list checkboxes */
+        .markdown-content input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        
+        /* File tab styles */
+        .file-tab {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .file-tab.active {
+            border-bottom: 2px solid var(--accent-color);
+            background-color: rgba(6, 182, 212, 0.1);
+        }
+        
+        .file-tab:hover:not(.active) {
+            background-color: #1e293b;
+        }
+        
+        /* Animated loader */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Card styles */
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+        }
+        
+        /* Nav link hover effect */
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hide console errors initially */
+        .console-error {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-slate-200">
+    <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fab fa-java text-2xl text-indigo-500"></i>
+                <span class="text-xl font-semibold">60 Days of Java</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="nav-link py-2">Home</a>
+                <a href="index.html#about" class="nav-link py-2">About</a>
+                <a href="index.html#journey" class="nav-link py-2">Journey</a>
+                <a href="https://github.com/Bhanu-partap-13/" target="_blank" class="nav-link py-2">GitHub <i class="fab fa-github ml-1"></i></a>
+            </div>
+            <div class="flex items-center space-x-4 md:hidden">
+                <a href="index.html" class="p-2">
+                    <i class="fas fa-home"></i>
+                </a>
+                <button class="text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16 px-4 md:px-8">
+        <div class="container mx-auto">
+            <!-- Day Header -->
+            <div class="mb-10">
+                <div class="flex items-center justify-between">
+                    <div id="day-navigation" class="flex space-x-2">
+                        <a id="prev-day" href="#" class="p-2 rounded-full bg-slate-800 hover:bg-indigo-600 transition">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                        <a id="next-day" href="#" class="p-2 rounded-full bg-slate-800 hover:bg-indigo-600 transition">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    <a href="index.html#journey" class="p-2 rounded-full bg-slate-800 hover:bg-indigo-600 transition">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </div>
+                
+                <div class="text-center my-8">
+                    <h1 id="day-title" class="text-4xl font-bold mb-2">Day <span id="day-number">1</span></h1>
+                    <h2 id="day-topic" class="text-xl text-indigo-400">Loading topic...</h2>
+                </div>
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loading" class="flex flex-col items-center justify-center py-20">
+                <div class="loader mb-4"></div>
+                <p class="text-slate-400">Loading day content...</p>
+            </div>
+            
+            <!-- Error State -->
+            <div id="error" class="hidden card p-8 rounded-xl text-center">
+                <div class="text-5xl text-red-500 mb-4">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Directory Not Found</h3>
+                <p class="text-slate-400 mb-6">We couldn't find the files for this day. The day might not be available yet.</p>
+                <a href="index.html" class="px-6 py-2 bg-indigo-600 rounded-full inline-block hover:bg-indigo-700 transition">
+                    Return to Home
+                </a>
+            </div>
+            
+            <!-- Content Container -->
+            <div id="content-container" class="hidden">
+                <!-- File Tabs -->
+                <div class="mb-6 overflow-x-auto">
+                    <div id="file-tabs" class="flex space-x-1"></div>
+                </div>
+                
+                <!-- Content -->
+                <div id="file-content-container" class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- Code/README Viewer -->
+                    <div class="md:col-span-8 card rounded-xl overflow-hidden">
+                        <div id="code-header" class="bg-slate-800 p-4 flex justify-between items-center">
+                            <div id="current-file-name" class="font-medium code-font"></div>
+                            <div class="flex space-x-2">
+                                <button id="copy-btn" class="p-2 hover:bg-slate-700 rounded transition">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                                <a id="download-btn" href="#" download class="p-2 hover:bg-slate-700 rounded transition">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div id="file-content" class="p-4 md:p-6 overflow-x-auto"></div>
+                    </div>
+                    
+                    <!-- File Explorer & Helpful Sidebar -->
+                    <div class="md:col-span-4 space-y-6">
+                        <!-- File Explorer -->
+                        <div class="card rounded-xl overflow-hidden">
+                            <div class="bg-slate-800 p-4">
+                                <h3 class="font-medium">Files in This Day</h3>
+                            </div>
+                            <div id="file-list" class="p-4"></div>
+                        </div>
+                        
+                        <!-- Helpful Resources -->
+                        <div class="card rounded-xl overflow-hidden">
+                            <div class="bg-slate-800 p-4">
+                                <h3 class="font-medium">Run & Learn</h3>
+                            </div>
+                            <div class="p-4 space-y-4">
+                                <p class="text-sm text-slate-400">Compile and run Java code online</p>
+                                <a href="https://www.online-java.com/" target="_blank" class="flex items-center justify-between p-3 bg-slate-800 rounded hover:bg-slate-700 transition">
+                                    <span>Run Online</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                
+                                <div class="border-t border-slate-700 my-4"></div>
+                                
+                                <div id="related-topics" class="space-y-2">
+                                    <h4 class="text-sm font-medium text-slate-300">Related Topics</h4>
+                                    <!-- Related topics will be added dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Interactive Console (basic) -->
+                        <div class="card rounded-xl overflow-hidden">
+                            <div class="bg-slate-800 p-4 flex items-center justify-between">
+                                <h3 class="font-medium">Code Notes</h3>
+                                <button id="clear-notes" class="text-xs text-slate-400 hover:text-white transition">
+                                    Clear
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <textarea id="notes-area" class="w-full h-32 bg-slate-800 text-slate-200 code-font p-3 rounded border border-slate-700 focus:border-indigo-500 focus:outline-none" placeholder="Add your notes about this code here..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="py-8 px-4 md:px-0 border-t border-slate-800">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fab fa-java text-2xl text-indigo-500"></i>
+                        <span class="text-xl font-semibold">60 Days of Java</span>
+                    </div>
+                    <p class="text-slate-400 mt-2">A complete Java learning journey.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="https://github.com/Bhanu-partap-13/60DaysOfJava" class="text-2xl text-slate-400 hover:text-indigo-500 transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://x.com/bhanupartap59" class="text-2xl text-slate-400 hover:text-indigo-500 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/bhanu-partap13/" class="text-2xl text-slate-400 hover:text-indigo-500 transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center text-slate-500 mt-8">
+                <p>&copy; 2025 Bhanu Partap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize variables
+        let currentDay = 1;
+        let currentFile = '';
+        let dayFiles = [];
+        const topics = [
+                "History, Features, and Simple Program Structure in Java", // Day 1
+                "Data Types and Command Line Arguments in Java", // Day 2
+                "Identifiers, Keywords, and Variables in Java", // Day 3
+                "Access Modifiers and Wrapper Classes in Java", // Day 4
+                "Operators in Java", // Day 5
+                "Conditional Statements and Switch Case in Java", // Day 6
+                "Recalling - Basics of Java", // Day 7
+                "Loops in Java", // Day 8
+                "1D Arrays in Java", // Day 9
+                "Varargs, 2D Arrays, and Enums in Java", // Day 10
+                "Classes & Objects in Java", // Day 11
+                "Methods in Java", // Day 12
+                "Constructors in Java", // Day 13
+                "`this` Keyword and Static Members in Java", // Day 14
+                "Understanding Inheritance in Java", // Day 15
+                "Method Overloading vs Overriding in Java", // Day 16
+                "Polymorphism in Java", // Day 17
+                "Encapsulation in Java", // Day 18
+                "Abstraction in Java", // Day 19
+                "Packages in Java", // Day 20
+                "Object Class and Methods in Java", // Day 21
+                "Super Keyword and Instanceof in Java", // Day 22
+                "Abstract Class, Abstract Method, and Interface in Java", // Day 23
+                "Static, Default Method, and Final Keyword in Java", // Day 24
+                "Nested Classes in Java", // Day 25
+                "Local Classes and Anonymous Classes in Java", // Day 26
+                "Concert Ticket Summary", // Day 27
+                "Functional Interfaces in Java", // Day 28
+                "Check If the Second Integer is Twice the First", // Day 29
+                "Maya's Two-Digit Digit Sum Checker", // Day 30
+                "Coming Soon", // Day 31
+                "Lambda Expressions and Interfaces in Java", // Day 32
+                "Utility Classes in Java (Legacy Classes)", // Day 33
+                "Modern Utility Classes in Java - MCQs", // Day 34
+                "Exceptions in Java", // Day 35
+                "Assertions in Java", // Day 36
+                "Nested Classes, Local Classes, Anonymous Classes, Lambda Expressions, Utility Classes, and Exceptions in Java", // Day 37
+                "Exceptions and Assertions in Java", // Day 38
+                "Exceptions and Assertions", // Day 39
+                "Coming Soon", // Day 40
+                "How to run the Code -", // Day 41
+                "Input and Output Operators in Java", // Day 42
+                "Read and Write Data in Java - MCQs", // Day 43
+                "File Streams in Java - MCQs", // Day 44
+                "Writing and Reading Objects Using Serialization in Java", // Day 45
+                "Coming Soon", // Day 46
+                "Understanding Generic Classes in Java", // Day 47
+                "Understanding Type Inference in Java", // Day 48
+                "Using Bounded Types and Wildcards in Java", // Day 49
+                "Wildcards in Java", // Day 50
+                "Collections and Generics in Java", // Day 51
+                "Collections and Generics in Java", // Day 52
+                "TreeSet in Java - MCQs for Beginners", // Day 53
+                "Mastering HashMaps in Java", // Day 54
+                "CRUD Operations in Java - MCQs", // Day 55
+                "Radix Sort MCQs 🎯", // Day 56
+                "Coming Soon", // Day 57
+                "Java Programming MCQs - Beginner Level", // Day 58
+                "Java Beans MCQs 🎯", // Day 59
+                "Coming Soon" // Day 60
+        ];
+        const repoOwner = 'Bhanu-partap-13';
+        const repoName = '60DaysOfJava';
+        
+        // Get day from URL parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dayParam = urlParams.get('day');
+            
+            if (dayParam && !isNaN(parseInt(dayParam))) {
+                currentDay = parseInt(dayParam);
+                
+                // Ensure day is within valid range
+                if (currentDay < 1) currentDay = 1;
+                if (currentDay > 60) currentDay = 60;
+                
+                // Update progress when viewing a day
+                updateDayProgress(currentDay);
+            }
+            
+            // Set day number and topic
+            document.getElementById('day-number').textContent = currentDay;
+            document.getElementById('day-title').textContent = `Day ${currentDay}`;
+            
+            const dayTopic = topics[currentDay - 1] || 'Java Programming';
+            document.getElementById('day-topic').textContent = dayTopic;
+            document.title = `Day ${currentDay}: ${dayTopic} - 60 Days of Java`;
+            
+            // Update navigation links
+            updateNavigation();
+            
+            // Load day content
+            loadDayContent();
+            
+            // Set up event listeners
+            document.getElementById('copy-btn').addEventListener('click', copyCodeToClipboard);
+            document.getElementById('clear-notes').addEventListener('click', clearNotes);
+            
+            // Load saved notes
+            const savedNotes = localStorage.getItem(`day-${currentDay}-notes`);
+            if (savedNotes) {
+                document.getElementById('notes-area').value = savedNotes;
+            }
+            
+            // Save notes when changed
+            document.getElementById('notes-area').addEventListener('input', function() {
+                localStorage.setItem(`day-${currentDay}-notes`, this.value);
+            });
+        });
+        
+        // Update navigation links
+        function updateNavigation() {
+            const prevDay = Math.max(1, currentDay - 1);
+            const nextDay = Math.min(60, currentDay + 1);
+            
+            document.getElementById('prev-day').href = `day.html?day=${prevDay}`;
+            document.getElementById('next-day').href = `day.html?day=${nextDay}`;
+            
+            // Disable navigation if at first or last day
+            if (currentDay === 1) {
+                document.getElementById('prev-day').classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                document.getElementById('prev-day').classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+            
+            if (currentDay === 60) {
+                document.getElementById('next-day').classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                document.getElementById('next-day').classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+        
+        // Load day content
+        async function loadDayContent() {
+            const dayFolder = `Day${currentDay < 10 ? '0' + currentDay : currentDay}`;
+            
+            // Show "Coming Soon" for days 59-60
+            if (currentDay >= 60) {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('content-container').classList.add('hidden');
+                
+                // Create custom coming soon message
+                const comingSoonDiv = document.createElement('div');
+                comingSoonDiv.className = 'card p-8 rounded-xl text-center';
+                comingSoonDiv.innerHTML = `
+                    <div class="text-5xl text-indigo-500 mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Coming Soon</h3>
+                    <p class="text-slate-400 mb-6">Day ${currentDay} content is currently being prepared and will be available soon.</p>
+                    <a href="index.html" class="px-6 py-2 bg-indigo-600 rounded-full inline-block hover:bg-indigo-700 transition">
+                        Return to Home
+                    </a>
+                `;
+                
+                // Replace error div with coming soon message
+                const errorDiv = document.getElementById('error');
+                errorDiv.parentNode.replaceChild(comingSoonDiv, errorDiv);
+                return;
+            }
+            
+            try {
+                // Attempt to load files from GitHub API
+                const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${dayFolder}`;
+                
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch directory contents from GitHub');
+                }
+                
+                const data = await response.json();
+                
+                // Filter out directories, only keep files
+                dayFiles = data
+                    .filter(item => item.type === 'file')
+                    .map(item => ({
+                        name: item.name,
+                        path: item.path,
+                        download_url: item.download_url,
+                        size: item.size
+                    }));
+                
+                if (dayFiles.length === 0) {
+                    showError();
+                    return;
+                }
+                
+                // Create file tabs and populate file list
+                createFileTabs();
+                
+                // Hide loading state, show content
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('content-container').classList.remove('hidden');
+                
+                // Set default file to readme.md if available
+                const readmeFile = dayFiles.find(file => file.name.toLowerCase().includes('readme'));
+                if (readmeFile) {
+                    selectFile(readmeFile);
+                } else {
+                    // Otherwise select first Java file
+                    const javaFile = dayFiles.find(file => file.name.endsWith('.java'));
+                    if (javaFile) {
+                        selectFile(javaFile);
+                    } else {
+                        // Fall back to first file in list
+                        selectFile(dayFiles[0]);
+                    }
+                }
+                
+                // Populate related topics
+                populateRelatedTopics();
+                
+            } catch (error) {
+                console.error('Error loading day content:', error);
+                showError();
+            }
+        }
+        
+        // Create file tabs
+        function createFileTabs() {
+            const tabsContainer = document.getElementById('file-tabs');
+            const fileList = document.getElementById('file-list');
+            
+            tabsContainer.innerHTML = '';
+            fileList.innerHTML = '';
+            
+            dayFiles.forEach(file => {
+                // Create tab
+                const tab = document.createElement('div');
+                tab.className = 'file-tab px-4 py-2 rounded-t-lg text-sm truncate';
+                
+                // Get file extension for icon
+                const ext = file.name.split('.').pop().toLowerCase();
+                let icon = 'fa-file';
+                
+                if (ext === 'java') icon = 'fa-java';
+                else if (ext === 'md') icon = 'fa-markdown';
+                else if (ext === 'txt') icon = 'fa-file-alt';
+                else if (ext === 'class') icon = 'fa-cube';
+                
+                tab.innerHTML = `<i class="fab ${icon} mr-2"></i>${file.name}`;
+                tab.addEventListener('click', () => selectFile(file));
+                tabsContainer.appendChild(tab);
+                
+                // Create file list item
+                const listItem = document.createElement('div');
+                listItem.className = 'py-2 px-3 hover:bg-slate-800 rounded cursor-pointer transition flex items-center';
+                listItem.innerHTML = `<i class="fab ${icon} mr-2 text-indigo-400"></i>${file.name}`;
+                listItem.addEventListener('click', () => selectFile(file));
+                fileList.appendChild(listItem);
+            });
+        }
+        
+        // Select a file to display
+        async function selectFile(file) {
+            currentFile = file;
+            
+            // Update active tab
+            document.querySelectorAll('.file-tab').forEach(tab => {
+                if (tab.textContent.includes(file.name)) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Update file name display
+            document.getElementById('current-file-name').textContent = file.name;
+            
+            // Update download link
+            const downloadBtn = document.getElementById('download-btn');
+            downloadBtn.setAttribute('href', file.download_url);
+            downloadBtn.setAttribute('download', file.name);
+            
+            try {
+                // Fetch file content from GitHub
+                const response = await fetch(file.download_url);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch file content');
+                }
+                
+                const content = await response.text();
+                displayFileContent(file.name, content);
+                
+            } catch (error) {
+                console.error('Error loading file:', error);
+                document.getElementById('file-content').innerHTML = `
+                    <div class="text-center py-10 text-red-400">
+                        <i class="fas fa-exclamation-circle text-3xl mb-4"></i>
+                        <p>Failed to load file content.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Display file content with appropriate formatting
+        function displayFileContent(filename, content) {
+            const contentContainer = document.getElementById('file-content');
+            const ext = filename.split('.').pop().toLowerCase();
+            
+            // Clear previous content
+            contentContainer.innerHTML = '';
+            
+            if (ext === 'md') {
+                // Convert Markdown to HTML
+                const converter = new showdown.Converter({
+                    tables: true,
+                    tasklists: true,
+                    strikethrough: true,
+                    emoji: true
+                });
+                const html = converter.makeHtml(content);
+                
+                // Create markdown content container
+                const markdownContainer = document.createElement('div');
+                markdownContainer.className = 'markdown-content';
+                markdownContainer.innerHTML = html;
+                
+                // Add to DOM
+                contentContainer.appendChild(markdownContainer);
+                
+                // Highlight code blocks in markdown
+                document.querySelectorAll('.markdown-content pre code').forEach(block => {
+                    hljs.highlightElement(block);
+                });
+                
+            } else if (ext === 'java' || ext === 'class') {
+                // Create pre and code elements
+                const pre = document.createElement('pre');
+                const code = document.createElement('code');
+                code.className = 'language-java';
+                code.textContent = content;
+                
+                // Add to DOM
+                pre.appendChild(code);
+                contentContainer.appendChild(pre);
+                
+                // Highlight code
+                hljs.highlightElement(code);
+                
+            } else {
+                // Plain text files
+                const pre = document.createElement('pre');
+                pre.className = 'text-slate-300 whitespace-pre-wrap';
+                pre.textContent = content;
+                contentContainer.appendChild(pre);
+            }
+        }
+        
+        // Show error state
+        function showError() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+        }
+        
+        // Copy code to clipboard
+        function copyCodeToClipboard() {
+            const codeElement = document.querySelector('#file-content pre code') || document.querySelector('#file-content pre');
+            
+            if (codeElement) {
+                const textToCopy = codeElement.textContent;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Show confirmation
+                    const copyBtn = document.getElementById('copy-btn');
+                    const originalIcon = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalIcon;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            }
+        }
+        
+        // Clear notes
+        function clearNotes() {
+            document.getElementById('notes-area').value = '';
+            localStorage.removeItem(`day-${currentDay}-notes`);
+        }
+        
+        // Populate related topics
+        function populateRelatedTopics() {
+            const relatedTopicsContainer = document.getElementById('related-topics');
+            relatedTopicsContainer.innerHTML = '<h4 class="text-sm font-medium text-slate-300">Related Topics</h4>';
+            
+            // Get current topic index
+            const currentTopicIndex = currentDay - 1;
+            
+            // Generate 3 related topics (previous, current, next)
+            for (let i = Math.max(0, currentTopicIndex - 1); i <= Math.min(59, currentTopicIndex + 1); i++) {
+                if (i === currentTopicIndex) continue; // Skip current day
+                
+                const topic = topics[i];
+                const day = i + 1;
+                
+                const topicLink = document.createElement('a');
+                topicLink.href = `day.html?day=${day}`;
+                topicLink.className = 'block p-2 text-sm text-slate-400 hover:text-indigo-400 hover:bg-slate-800 rounded transition';
+                topicLink.innerHTML = `Day ${day}: ${topic}`;
+                
+                relatedTopicsContainer.appendChild(topicLink);
+            }
+            
+            // Add link to Java documentation
+            const docsLink = document.createElement('a');
+            docsLink.href = 'https://docs.oracle.com/en/java/javase/17/docs/api/index.html';
+            docsLink.target = '_blank';
+            docsLink.className = 'block p-2 text-sm text-slate-400 hover:text-indigo-400 hover:bg-slate-800 rounded transition mt-2';
+            docsLink.innerHTML = '<i class="fas fa-external-link-alt mr-1"></i> Java API Documentation';
+            
+            relatedTopicsContainer.appendChild(docsLink);
+        }
+
+        // Add this new function
+        function updateDayProgress(day) {
+            // Get current progress
+            const currentProgress = localStorage.getItem(`day-${day}-progress`);
+            
+            // If no progress yet or less than 30%, set to at least 30% for viewing
+            if (!currentProgress || parseInt(currentProgress) < 30) {
+                localStorage.setItem(`day-${day}-progress`, "30");
+            } else if (parseInt(currentProgress) < 100) {
+                // If already has progress but not complete, increment by 5-10%
+                const newProgress = Math.min(100, parseInt(currentProgress) + 5 + Math.floor(Math.random() * 5));
+                localStorage.setItem(`day-${day}-progress`, newProgress.toString());
+            }
+        }
+    </script>
+</body>
+</html> 

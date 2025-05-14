@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60 Days of Java</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(79, 70, 229, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .glow {
+            filter: drop-shadow(0 0 8px rgba(79, 70, 229, 0.6));
+        }
+        
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(79, 70, 229, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+        }
+        
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .progress-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+        
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .header-bg {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-bg::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.1) 0%, transparent 80%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Footer Enhancements */
+        .footer-java-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem; /* Large icon size */
+            color: rgba(79, 70, 229, 0.1); /* Very subtle initial color */
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none; /* Don't interfere with clicks */
+        }
+        
+        footer:hover .footer-java-icon {
+            opacity: 0.3; /* Make it visible on hover */
+            transform: translate(-50%, -50%) scale(1.1); /* Subtle scale up */
+            filter: drop-shadow(0 0 10px rgba(79, 70, 229, 0.5)); /* Add glow */
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            color: var(--indigo-500);
+            filter: drop-shadow(0 0 5px rgba(79, 70, 229, 0.4));
+        }
+    </style>
+</head>
+<body class="text-slate-200">
+    <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fab fa-java text-2xl text-indigo-500"></i>
+                <span class="text-xl font-semibold">60 Days of Java</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link py-2">Home</a>
+                <a href="index.html#about" class="nav-link py-2">About</a>
+                <a href="index.html#journey" class="nav-link py-2">Journey</a>
+                <a href="https://github.com/Bhanu-partap-13/60DaysOfJava" target="_blank" class="nav-link py-2">GitHub <i class="fab fa-github ml-1"></i></a>
+            </div>
+            <button class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="header-bg pt-28 pb-16 px-4 md:px-0">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 md:pr-12" data-aos="fade-right">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-400">60 Days</span> of Java Learning
+                    </h1>
+                    <p class="text-xl text-slate-400 mb-8">
+                        A comprehensive journey from Java basics to advanced concepts, carefully structured for optimal learning.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#journey" class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-indigo-500 rounded-full font-medium transition hover:shadow-lg hover:shadow-indigo-500/30">Start Learning</a>
+                        <a href="https://github.com/Bhanu-partap-13/60DaysOfJava" class="px-8 py-3 border border-slate-700 rounded-full font-medium hover:bg-slate-800 transition">View Repository</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-12 md:mt-0 relative" data-aos="fade-left">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-cyan-400/20 rounded-lg blur-xl"></div>
+                        <div class="code-font relative bg-slate-900/90 p-6 rounded-lg border border-slate-700 shadow-xl">
+<pre class="text-sm md:text-base"><span class="text-pink-400">public class</span> <span class="text-yellow-300">JavaJourney</span> {
+    <span class="text-pink-400">public static void</span> <span class="text-blue-400">main</span>(<span class="text-pink-400">String</span>[] args) {
+        <span class="text-green-400">// Start your 60-day Java journey</span>
+        <span class="text-yellow-300">System</span>.<span class="text-blue-300">out</span>.<span class="text-blue-400">println</span>(<span class="text-emerald-300">"Hello, Java World!"</span>);
+        
+        <span class="text-pink-400">for</span> (<span class="text-pink-400">int</span> day = <span class="text-purple-300">1</span>; day <= <span class="text-purple-300">60</span>; day++) {
+            <span class="text-blue-400">learnJava</span>(day);
+        }
+    }
+    
+    <span class="text-pink-400">private static void</span> <span class="text-blue-400">learnJava</span>(<span class="text-pink-400">int</span> day) {
+        <span class="text-green-400">// Your daily learning awaits...</span>
+    }
+}</pre>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 text-6xl text-indigo-500 opacity-20">
+                        <i class="fab fa-java"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 md:px-0">
+        <div class="container mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">About This Journey</h2>
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                    This 60-day Java curriculum takes you from basic syntax to advanced concepts, 
+                    with practical code examples and challenges at every step.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card p-8 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl text-indigo-500 mb-4">
+                        <i class="fas fa-code floating-icon"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Structured Learning</h3>
+                    <p class="text-slate-400">
+                        Each day focuses on specific Java concepts, building on previous knowledge for optimal retention.
+                    </p>
+                </div>
+                
+                <div class="card p-8 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl text-cyan-500 mb-4">
+                        <i class="fas fa-laptop-code floating-icon"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Practical Code</h3>
+                    <p class="text-slate-400">
+                        Every concept comes with real-world coding examples that you can run and experiment with.
+                    </p>
+                </div>
+                
+                <div class="card p-8 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl text-purple-500 mb-4">
+                        <i class="fas fa-graduation-cap floating-icon"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Comprehensive Coverage</h3>
+                    <p class="text-slate-400">
+                        From core fundamentals to advanced topics like multithreading, networking, and design patterns.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="py-20 px-4 md:px-0 bg-slate-900/50">
+        <div class="container mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">Your Learning Path</h2>
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                    Explore all 60 days of Java content. Each card links to detailed notes, code examples, and exercises.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mt-8">
+                    <button class="filter-btn px-5 py-2 bg-slate-800 rounded-full hover:bg-indigo-600 transition active" data-filter="all">
+                        All Days
+                    </button>
+                    <button class="filter-btn px-5 py-2 bg-slate-800 rounded-full hover:bg-indigo-600 transition" data-filter="basics">
+                        Basics (1-15)
+                    </button>
+                    <button class="filter-btn px-5 py-2 bg-slate-800 rounded-full hover:bg-indigo-600 transition" data-filter="intermediate">
+                        Intermediate (16-40)
+                    </button>
+                    <button class="filter-btn px-5 py-2 bg-slate-800 rounded-full hover:bg-indigo-600 transition" data-filter="advanced">
+                        Advanced (41-60)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="days-container">
+                <!-- Days will be dynamically generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 md:px-0 border-t border-slate-800">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fab fa-java text-2xl text-indigo-500"></i>
+                        <span class="text-xl font-semibold">60 Days of Java</span>
+                    </div>
+                    <p class="text-slate-400 mt-2">A complete Java learning journey.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="https://github.com/Bhanu-partap-13/" class="text-2xl text-slate-400 hover:text-indigo-500 transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://x.com/bhanupartap59" class="text-2xl text-slate-400 hover:text-indigo-500 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/bhanu-partap13/" class="text-2xl text-slate-400 hover:text-indigo-500 transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center text-slate-500 mt-8">
+                <p>&copy; 2025 Bhanu Partap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Java icon for footer effect -->
+    <div class="footer-java-icon">
+        <i class="fab fa-java"></i>
+    </div>
+
+    <script>
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true
+            });
+            
+            // Generate day cards
+            const daysContainer = document.getElementById('days-container');
+            
+            for (let day = 1; day <= 60; day++) {
+                // Determine category based on day number
+                let category = '';
+                if (day <= 15) category = 'basics';
+                else if (day <= 40) category = 'intermediate';
+                else category = 'advanced';
+                
+                // Format day number with leading zero if needed
+                const formattedDay = day < 10 ? '0' + day : day;
+                
+                // Create card element
+                const card = document.createElement('div');
+                card.className = `card rounded-xl overflow-hidden day-card ${category}`;
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', (day % 8) * 50);
+                card.setAttribute('data-day', day);
+                
+                // Calculate progress for this day
+                const progress = getProgressForDay(day);
+                
+                // Customize card content based on day range
+                let icon, color, bgClass;
+                
+                if (day <= 15) {
+                    icon = 'fa-solid fa-code';
+                    color = 'text-cyan-500';
+                    bgClass = 'from-cyan-500/10 to-cyan-600/10';
+                } else if (day <= 40) {
+                    icon = 'fa-solid fa-laptop-code';
+                    color = 'text-indigo-500';
+                    bgClass = 'from-indigo-500/10 to-indigo-600/10';
+                } else {
+                    icon = 'fa-solid fa-microchip';
+                    color = 'text-purple-500';
+                    bgClass = 'from-purple-500/10 to-purple-600/10';
+                }
+                
+                // Special handling for Days 59-60 (Coming Soon)
+                const isComingSoon = day >= 60;
+                
+                let cardContent = `
+                    <div class="bg-gradient-to-br ${bgClass} p-1">
+                        <div class="bg-slate-900 p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="flex items-center">
+                                        <i class="${icon} ${color} mr-2"></i>
+                                        <h3 class="text-xl font-semibold">Day ${formattedDay}</h3>
+                                    </div>
+                                    <div class="mt-1 text-sm text-slate-400 line-clamp-1">
+                                        ${getTopicForDay(day)}
+                                    </div>
+                                </div>
+                                <div class="bg-slate-800 rounded-full h-8 w-8 flex items-center justify-center">
+                                    <i class="fas fa-arrow-right text-sm"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 text-xs text-slate-500">
+                                <div class="flex justify-between mb-1">
+                                    <span>Progress</span>
+                                    <span>${progress}%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                                    <div class="bg-gradient-to-r from-indigo-500 to-cyan-500 h-1.5 rounded-full progress-bar" style="width: ${progress}%" data-progress="${progress}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add coming soon overlay for Days 59-60
+                if (isComingSoon) {
+                    cardContent += `
+                        <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm">
+                            <div class="text-center">
+                                <div class="text-2xl text-indigo-500 mb-2">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <p class="font-semibold text-white">Coming Soon</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                card.innerHTML = cardContent;
+                
+                // Add click event for normal days, not for coming soon days
+                if (!isComingSoon) {
+                    const link = document.createElement('a');
+                    link.href = `day.html?day=${day}`;
+                    link.className = 'absolute inset-0';
+                    link.setAttribute('aria-label', `View Day ${day}`);
+                    link.addEventListener('click', () => saveCardClick(day));
+                    card.appendChild(link);
+                }
+                
+                daysContainer.appendChild(card);
+            }
+            
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active', 'bg-indigo-600'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active', 'bg-indigo-600');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    const cards = document.querySelectorAll('.day-card');
+                    
+                    cards.forEach(card => {
+                        if (filter === 'all' || card.classList.contains(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Add event listeners to cards for progress updates
+            document.querySelectorAll('.day-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const day = this.getAttribute('data-day');
+                    if (day) {
+                        saveCardClick(parseInt(day));
+                    }
+                });
+            });
+            
+            // Add a function to reset progress (for testing)
+            window.resetAllProgress = function() {
+                for (let i = 1; i <= 60; i++) {
+                    localStorage.removeItem(`day-${i}-progress`);
+                }
+                location.reload();
+            };
+        });
+        
+        // Function to return topic name based on day number
+        function getTopicForDay(day) {
+            const topics = [
+                "History, Features, and Simple Program Structure in Java", // Day 1
+                "Data Types and Command Line Arguments in Java", // Day 2
+                "Identifiers, Keywords, and Variables in Java", // Day 3
+                "Access Modifiers and Wrapper Classes in Java", // Day 4
+                "Operators in Java", // Day 5
+                "Conditional Statements and Switch Case in Java", // Day 6
+                "Recalling - Basics of Java", // Day 7
+                "Loops in Java", // Day 8
+                "1D Arrays in Java", // Day 9
+                "Varargs, 2D Arrays, and Enums in Java", // Day 10
+                "Classes & Objects in Java", // Day 11
+                "Methods in Java", // Day 12
+                "Constructors in Java", // Day 13
+                "`this` Keyword and Static Members in Java", // Day 14
+                "Understanding Inheritance in Java", // Day 15
+                "Method Overloading vs Overriding in Java", // Day 16
+                "Polymorphism in Java", // Day 17
+                "Encapsulation in Java", // Day 18
+                "Abstraction in Java", // Day 19
+                "Packages in Java", // Day 20
+                "Object Class and Methods in Java", // Day 21
+                "Super Keyword and Instanceof in Java", // Day 22
+                "Abstract Class, Abstract Method, and Interface in Java", // Day 23
+                "Static, Default Method, and Final Keyword in Java", // Day 24
+                "Nested Classes in Java", // Day 25
+                "Local Classes and Anonymous Classes in Java", // Day 26
+                "Concert Ticket Summary", // Day 27
+                "Functional Interfaces in Java", // Day 28
+                "Check If the Second Integer is Twice the First", // Day 29
+                "Practice Questions", // Day 30
+                "Lambda Expressions in Java", // Day 31
+                "Interfaces in Java", // Day 32
+                "Utility Classes in Java (Legacy Classes)", // Day 33
+                "Modern Utility Classes in Java - MCQs", // Day 34
+                "Exceptions in Java", // Day 35
+                "Assertions in Java", // Day 36
+                "Nested Classes, Local Classes, Anonymous Classes, Lambda Expressions, Utility Classes, and Exceptions in Java", // Day 37
+                "Exceptions and Assertions in Java", // Day 38
+                "Exceptions and Assertions", // Day 39
+                "Java Exception Handling ", // Day 40
+                "How to run the Code -", // Day 41
+                "Input and Output Operators in Java", // Day 42
+                "Read and Write Data in Java - MCQs", // Day 43
+                "File Streams in Java - MCQs", // Day 44
+                "Writing and Reading Objects Using Serialization in Java", // Day 45
+                "File Handling", // Day 46
+                "Generic Classes in Java", // Day 47
+                "Understanding Type Inference in Java", // Day 48
+                "Using Bounded Types and Wildcards in Java", // Day 49
+                "Wildcards in Java", // Day 50
+                "Collections and Generics in Java", // Day 51
+                "ArrayLists in Java", // Day 52
+                "TreeSet in Java - MCQs for Beginners", // Day 53
+                "Mastering HashMaps in Java", // Day 54
+                "CRUD Operations in Java - MCQs", // Day 55
+                "Radix Sort", // Day 56
+                "Coming Soon", // Day 57
+                "Java Programming MCQs - Beginner Level", // Day 58
+                "Java Beans MCQs 🎯", // Day 59
+                "Coming Soon" // Day 60
+            ];
+            return topics[day - 1];
+        }
+        
+        // Function to calculate progress for each day
+        function getProgressForDay(day) {
+            // Check if we have saved progress in localStorage
+            const savedProgress = localStorage.getItem(`day-${day}-progress`);
+            if (savedProgress !== null) {
+                return parseInt(savedProgress);
+            }
+            
+            // Calculate default progress based on day number and current date
+            const now = new Date();
+            const startDate = new Date(2023, 0, 1); // Example starting date - Jan 1, 2023
+            const daysPassed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+            
+            if (day < daysPassed) {
+                // Past days: 100% complete
+                return 100;
+            } else if (day === daysPassed) {
+                // Current day: random progress between 30-70%
+                return Math.floor(Math.random() * 40) + 30;
+            } else {
+                // Future days: 0% for far future, small % for near future
+                const daysAhead = day - daysPassed;
+                if (daysAhead <= 3) {
+                    return Math.floor(Math.random() * 20);
+                } else {
+                    return 0;
+                }
+            }
+        }
+        
+        // Function to save progress on card click
+        function saveCardClick(day) {
+            // When a user clicks a day, we increment its progress by a random amount (5-15%)
+            const currentProgress = getProgressForDay(day);
+            const newProgress = Math.min(100, currentProgress + Math.floor(Math.random() * 10) + 5);
+            localStorage.setItem(`day-${day}-progress`, newProgress);
+        }
+    </script>
+</body>
+</html>
