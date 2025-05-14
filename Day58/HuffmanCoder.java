@@ -1,3 +1,5 @@
+package Day58;
+
 import java.util.*;
 
 class HuffmanCoder {

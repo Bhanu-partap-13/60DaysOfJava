@@ -1,3 +1,5 @@
+package Day58;
+
 class Main {
   public static void main(String[] args) throws Exception{
     String str = "abbccda";
