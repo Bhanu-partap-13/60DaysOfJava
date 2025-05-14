@@ -382,8 +382,8 @@
                     bgClass = 'from-purple-500/10 to-purple-600/10';
                 }
                 
-                // Special handling for Days 59-60 (Coming Soon)
-                const isComingSoon = day >= 60;
+                // Special handling for Days (Coming Soon)
+                const isComingSoon = day > 60;
                 
                 let cardContent = `
                     <div class="bg-gradient-to-br ${bgClass} p-1">
@@ -527,10 +527,10 @@
                 "Modern Utility Classes in Java - MCQs", // Day 34
                 "Exceptions in Java", // Day 35
                 "Assertions in Java", // Day 36
-                "Nested Classes, Local Classes, Anonymous Classes, Lambda Expressions, Utility Classes, and Exceptions in Java", // Day 37
-                "Exceptions and Assertions in Java", // Day 38
-                "Exceptions and Assertions", // Day 39
-                "Java Exception Handling ", // Day 40
+                "Questions on Nested Classes, Local Classes, Anonymous Classes, Lambda Expressions, Utility Classes, and Exceptions in Java", // Day 37
+                "MultiCatch in Java", // Day 38
+                "Custom MultiCatch", // Day 39
+                "Java Exception Handling Types", // Day 40
                 "How to run the Code -", // Day 41
                 "Input and Output Operators in Java", // Day 42
                 "Read and Write Data in Java - MCQs", // Day 43
@@ -547,10 +547,10 @@
                 "Mastering HashMaps in Java", // Day 54
                 "CRUD Operations in Java - MCQs", // Day 55
                 "Radix Sort", // Day 56
-                "Coming Soon", // Day 57
+                "Java DSA Questions", // Day 57
                 "Java Programming MCQs - Beginner Level", // Day 58
                 "Java Beans MCQs 🎯", // Day 59
-                "Coming Soon" // Day 60
+                "SpringBoot In Java" // Day 60
             ];
             return topics[day - 1];
         }
