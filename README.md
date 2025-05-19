@@ -2,7 +2,7 @@
 <div id="top">
 
 # <p>60 Days of Java Challenge</p>
-
+## Checkout at https://bhanu-partap-13.github.io/60DaysOfJava/
 <i><p>Welcome to my <b>60 Days of Java</b> repository! This is a challenge where I post daily Java coding problems, solutions, and important topics related to Java. The goal is to enhance my skills in Java and document the learning process.</p></i>
 
 </div>
